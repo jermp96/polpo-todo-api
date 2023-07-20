@@ -9,7 +9,7 @@ export class CreateTaskDto {
   @Min(0)
   @Max(1)
   @IsNotEmpty()
-  readonly completed: boolean;
+  readonly completed: number;
 
   @IsInt()
   @IsNotEmpty()

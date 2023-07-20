@@ -25,4 +25,8 @@ export class UsersService {
     if (!user) throw new NotFoundException(`User with id '${id}' not found`);
     return user;
   }
+
+  fillUsersWithSeedData(users: Users[]) {
+    this.users = users;
+  }
 }

@@ -7,7 +7,7 @@ import { CreateTaskDto } from './dto/create-task.dto';
 
 @Injectable()
 export class ToDosService {
-  private ToDos: ToDo[] = [];
+  private toDos: ToDo[] = [];
   private tasks: Task[] = [];
 
   constructor(private readonly userService: UsersService) {}
@@ -17,11 +17,11 @@ export class ToDosService {
     let todo: ToDo;
     if (user) {
       todo = {
-        id: this.ToDos.length + 1,
+        id: this.toDos.length + 1,
         ...createToDoDto,
       };
 
-      this.ToDos.push(todo);
+      this.toDos.push(todo);
     }
     return todo;
   }
@@ -42,11 +42,11 @@ export class ToDosService {
   }
 
   findAll() {
-    return this.ToDos;
+    return this.toDos;
   }
 
   findOne(id: number) {
-    const todo = this.ToDos.find((todo) => todo.id === id);
+    const todo = this.toDos.find((todo) => todo.id === id);
     if (!todo) throw new NotFoundException(`ToDo with id '${id}' not found`);
 
     return todo;
@@ -70,11 +70,19 @@ export class ToDosService {
 
   findByUserId(userId: number) {
     const user = this.userService.findOne(userId);
-    const todos = this.ToDos.filter((todo) => todo.userId === user.id);
+    const todos = this.toDos.filter((todo) => todo.userId === user.id);
     if (!todos)
       throw new NotFoundException(
         `There not ToDos for the user with id '${user.id}'`,
       );
     return todos;
+  }
+
+  fillTodosWithSeedData(todos: ToDo[]) {
+    this.toDos = todos;
+  }
+
+  fillTaskWithSeedData(tasks: Task[]) {
+    this.tasks = tasks;
   }
 }
