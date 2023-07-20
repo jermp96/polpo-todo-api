@@ -1,15 +1,15 @@
-import { IsArray, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateToDoDto {
   @IsString()
   @IsNotEmpty()
-  title: string;
+  readonly title: string;
 
   @IsArray()
   @IsNotEmpty()
-  keywords: string[];
+  readonly keywords: string[];
 
-  @IsNumber()
+  @IsInt()
   @IsNotEmpty()
-  userId: number;
+  readonly userId: number;
 }

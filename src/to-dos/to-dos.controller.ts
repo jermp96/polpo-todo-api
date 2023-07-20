@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { ToDosService } from './to-dos.service';
 import { CreateToDoDto } from './dto/create-to-do.dto';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 @Controller('todos')
 export class ToDosController {
@@ -18,6 +19,14 @@ export class ToDosController {
     return this.toDosService.create(createToDoDto);
   }
 
+  @Post(':id/task')
+  createTask(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() createTaskDto: CreateTaskDto,
+  ) {
+    return this.toDosService.createTask(id, createTaskDto);
+  }
+
   @Get()
   findAll() {
     return this.toDosService.findAll();
@@ -25,6 +34,6 @@ export class ToDosController {
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.toDosService.findOne(+id);
+    return this.toDosService.findOneWithTasks(+id);
   }
 }
