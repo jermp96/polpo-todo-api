@@ -29,3 +29,7 @@ $ npm run start:prod
 ## Seed
 Popular BD
 http://localhost:5000/seed
+
+## Documentación
+Swagger
+http://localhost:5000/api
