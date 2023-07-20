@@ -27,7 +27,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 ## Seed
-Popular BD
+Popular BD (Arrays locales, sin conexión a un base de datos)
 http://localhost:5000/seed
 
 ## Documentación
