@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './entities/user.entity';
+import { CreateUsersDto } from './dto/create-users.dto';
+import { Users } from './entities/users.entity';
 
 @Injectable()
-export class UserService {
-  private users: User[] = [];
+export class UsersService {
+  private users: Users[] = [];
 
-  create(createUserDto: CreateUserDto) {
-    const user: User = {
+  create(createUserDto: CreateUsersDto) {
+    const user: Users = {
       id: this.users.length + 1,
       ...createUserDto,
     };
