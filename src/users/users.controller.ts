@@ -1,10 +1,21 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUsersDto } from './dto/create-users.dto';
+import { ToDosService } from 'src/to-dos/to-dos.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly userService: UsersService) {}
+  constructor(
+    private readonly userService: UsersService,
+    private readonly toDosService: ToDosService,
+  ) {}
 
   @Post()
   create(@Body() createUserDto: CreateUsersDto) {
@@ -17,7 +28,12 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.userService.findOne(+id);
+  }
+
+  @Get(':id/todos')
+  findTodoByUserId(@Param('id', ParseIntPipe) id: number) {
+    return this.toDosService.findByUserId(id);
   }
 }
